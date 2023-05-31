@@ -1,0 +1,23 @@
+section.contacts
+	.contacts__container
+		.contacts__content
+			.contacts__left
+				h2.contacts__title._title Контакты
+				form.contacts__form.form
+					.form__item
+						label.form__label(for='name')
+						input.form__input#name(type='text', name='name', placeholder='Введите ваше имя', autocomplete='off', pattern='[a-z]{1,15}', data-rule-required="true", data-rule-minlength="2", data-msg="Введите ваше имя")
+					.form__item
+						label.form__label(for='tel')
+						input.form__input.contact-tel#tel(type='text', name='tel', placeholder='Номер телефона', autocomplete='off', data-rule-required="true", data-rule-minlength="10", data-msg="Введите номер телефона")
+					button.form__btn(type='submit') Заказать звонок
+				.contacts__address
+					span Адрес: Симферополь, ул. Киевская, 41
+					span E-mail:
+						a(href='mailto:info@doctorvet-krym.ru') info@doctorvet-krym.ru
+					span График работы: с 9:00 до 21:00 (ежедневно)
+			.contacts__right
+				.contacts__map#map
+					a(href='https://yandex.ru/maps/146/simferopol/?utm_medium=mapframe&utm_source=maps' style='color:#eee;font-size:12px;position:absolute;top:0px;') &Scy;&icy;&mcy;&fcy;&iecy;&rcy;&ocy;&pcy;&ocy;&lcy;&softcy;
+					a(href='https://yandex.ru/maps/146/simferopol/house/kiyevskaya_ulitsa_41/Z00YdwZpTkICQFpufXV0cnlrbQ==/?from=tabbar&ll=34.119775%2C44.953589&source=serp_navig&utm_medium=mapframe&utm_source=maps&z=16' style='color:#eee;font-size:12px;position:absolute;top:14px;') &Kcy;&icy;&iecy;&vcy;&scy;&kcy;&acy;&yacy; &ucy;&lcy;&icy;&tscy;&acy;, 41 &mdash; &YAcy;&ncy;&dcy;&iecy;&kcy;&scy;&nbsp;&Kcy;&acy;&rcy;&tcy;&ycy;
+					iframe(src='https://yandex.ru/map-widget/v1/?from=tabbar&ll=34.119775%2C44.953589&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxNjk3NTAwNzY3EmTQoNC-0YHRgdC40Y8sINCg0LXRgdC_0YPQsdC70LjQutCwINCa0YDRi9C8LCDQodC40LzRhNC10YDQvtC_0L7Qu9GMLCDQmtC40LXQstGB0LrQsNGPINGD0LvQuNGG0LAsIDQxIgoNpnoIQhV60DNC&source=serp_navig&z=16' allowfullscreen='true' style='position:relative;')

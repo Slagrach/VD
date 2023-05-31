@@ -1,0 +1,138 @@
+.footer {
+	position: relative;
+	background: #F0F4FC;
+
+	&__content {
+		padding: 30px 0 20px;
+		@media(max-width: 992px) {
+			padding: 10px 0;
+		}
+	}
+
+	&__body {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+		margin: 0 0 15px;
+		@media(max-width: 992px) {
+			margin: 0 0 10px;
+		}
+		@media(max-width: 790px) {
+			flex-direction: column;
+		}
+	}
+
+	&__logo {
+		position: relative;
+
+		&:before {
+			position: absolute;
+			content: '';
+			top: 0;
+			left: 0;
+			width: 312px;
+			height: 311px;
+			background-image: url('../images/footer-img.png');
+			background-repeat: no-repeat;
+			background-size: 48%;
+			background-position: 56% 0;
+		}
+	}
+
+	&__tel {
+		@extend .header__tel;
+
+		a {
+			font-size: 20px;
+			line-height: 28px;
+			font-weight: 600;
+			color: #45494D;
+			transition: color .4s ease 0s;
+			@media (any-hover: hover) {
+				&:hover {
+					color: #0070F0;
+				}
+			}
+		}
+	}
+
+	&__tel-icon {
+		@extend .header__tel-icon;
+	}
+
+	&__inner {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin: 0 0 45px;
+		@media(max-width: 992px) {
+			margin: 0 0 10px;
+		}
+		@media(max-width: 790px) {
+			justify-content: center;
+		}
+	}
+
+	&__btn {
+		@extend .header__btn;
+	}
+
+	&__copy {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		span {
+			line-height: 22px;
+			color: #727980;
+			@media(max-width: 420px) {
+				order: 2;
+			}
+		}
+
+		@media(max-width: 420px) {
+			flex-direction: column;
+		}
+	}
+
+	&__social {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	&__social-link {
+		svg path {
+			transition: fill .4s ease 0s;
+		}
+
+		@media (any-hover: hover) {
+			&:hover {
+				svg path {
+					fill: #0070F0;
+				}
+			}
+		}
+	}
+}
+
+.footer__menu .menu__list {
+	flex-wrap: wrap;
+	gap: 40px;
+	@media(max-width: 992px) {
+		flex-direction: row;
+		gap: 10px;
+	}
+	@media(max-width: 420px) {
+		justify-content: center;
+	}
+
+	.menu__item {
+		@media(max-width: 992px) {
+			margin: 0;
+		}
+		@media(max-width: 767px) {
+		}
+	}
+}

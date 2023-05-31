@@ -1,0 +1,89 @@
+.why {
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 52px 0 140px;
+	}
+
+	&__header {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 0 50px;
+		z-index: 1;
+	}
+
+	&__title {
+		text-align: center;
+		color: #28394D;
+	}
+
+	&__body {
+		max-width: 880px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 30px;
+		@media (max-width: 767px) {
+			flex-direction: column;
+		}
+	}
+
+	&__left,
+	&__right {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 70px;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+		@media (any-hover: hover) {
+				&:hover img {
+					animation: rotation 5s infinite linear;
+				}
+			}
+
+		img {
+			width: 48px;
+			height: 48px;
+		}
+
+		span {
+			font-size: 18px;
+			line-height: 20px;
+			font-weight: 600;
+			text-align: center;
+		}
+	}
+
+	&__center {
+		max-width: 391px;
+		width: 100%;
+
+		img {
+			display: block;
+			max-width: 100%;
+			width: 100%;
+		}
+	}
+
+	&__right {
+	}
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

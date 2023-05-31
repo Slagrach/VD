@@ -1,0 +1,278 @@
+@use 'sass:math';
+
+@function proc($pxOne, $pxTwo) {
+	$result: math.div($pxOne, $pxTwo) * 100%;
+	@return $result;
+}
+
+@function rem($px) {
+	$result: math.div($px, 16) + rem;
+	@return $result;
+}
+
+@function em($px) {
+	$result: math.div($px, 16) + em;
+	@return $result;
+}
+$browser-context: 16;
+@function emMy($pixels, $context: $browser-context) {
+	@return #{$pixels/$context}em;
+}
+
+$ParentWidth: 100;
+$ValuePercent: 10%;
+
+$ChildPadding: ($ParentWidth)* $ValuePercent;
+$maxWidth: 1600;
+$containerWidth: 1200;
+
+@mixin aFont($pcSize, $mobSize, $maxSize) {
+	$addSize: $pcSize - $mobSize;
+
+	@if $maxSize==1 {
+		font-size: $pcSize + px;
+		@media (max-width: #{$containerWidth + px}) {
+			font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$containerWidth - 320}));
+		}
+	} @else if $maxSize==2 {
+		font-size: $pcSize + px;
+		@media (min-width: #{$containerWidth + px}) {
+			font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+		}
+	} @else {
+		font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+	}
+}
+
+@mixin avPx($property, $startSize, $minSize, $type) {
+	$addSize: $startSize - $minSize;
+
+	@if $type==1 {
+		#{$property}: $startSize + px;
+		@media (max-width: #{$containerWidth + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$containerWidth - 320}));
+		}
+	} @else if $type==2 {
+		#{$property}: $startSize + px;
+		@media (min-width: #{$containerWidth + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+		}
+	} @else {
+		#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+	}
+}
+//Адаптивное свойство
+@mixin avRem($property, $startSize, $minSize, $widthFrom: $containerWidth, $widthTo: $minWidth, $keepSize: 0) {
+	// Брейк-поинты в EM
+	$widthFromMedia: em($widthFrom);
+	$widthToMedia: em($widthTo);
+	// Ночальное и конечное значение в REM
+	$minSizeValue: rem($minSize);
+	$startSizeValue: rem($startSize);
+	// Пересчитываем переменные относительно
+	// размера шрифта по умолчанию
+	$minWidth: math.div($minWidth, 16);
+	$maxWidth: math.div($maxWidth, 16);
+	$containerWidth: math.div($containerWidth, 16);
+	$addSize: math.div($startSize - $minSize, 16);
+	$widthTo: math.div($widthTo, 16);
+	$widthFrom: math.div($widthFrom, 16);
+	// Если указано ограничение у контейнера,
+	// либо указана стартовая или конечная ширина
+	// включаем режим работы в промежутке ширин
+	@if ($maxWidthContainer > 0 or $widthFrom != $containerWidth or $widthTo != $minWidth) and $widthFrom > $widthTo {
+		// Если стартовая ширина равна ширине контейнера + отступы,
+		// или указана настройка 'keepSize' ставим значение
+		// по умолчанию равное стартовому размеру
+		@if $widthFrom == $containerWidth or $keepSize == 1 or $keepSize == 2 {
+			@media (min-width: $widthFromMedia) {
+				#{$property}: $startSizeValue;
+			}
+		}
+		// Адаптируем размер в промежутке между указанными ширинами вьюпорта
+		@media (min-width: $widthToMedia) and (max-width: $widthFromMedia) {
+			#{$property}: calc(#{$minSizeValue} + #{$addSize} * (((100vw - #{$widthTo + rem})) / ((#{$widthFrom - $widthTo}))));
+		}
+		// Если конечная ширина равна минимальной ширине
+		// или указана настройка 'keepSize' ставим значение
+		// по умолчанию равное конечному размеру
+		@if $widthTo == $minWidth or $keepSize == 1 or $keepSize == 3 {
+			@media (max-width: $widthToMedia) {
+				#{$property}: $minSizeValue;
+			}
+		}
+	} @else {
+		// Режим работы по всей ширине вьюпорта
+		#{$property}: calc(#{$minSizeValue} + #{$addSize} * (((100vw - #{$widthTo + rem})) / ((#{$maxWidth - $widthTo}))));
+	}
+}
+
+@mixin adaptiveValueClamp($property, $startSize, $minSize, $widthFrom: $containerWidth, $widthTo: $minWidth, $keepSize: 0) {
+	//$widthFrom: $containerWidth;
+	//$widthTo: $minWidth;
+
+	@if ($startSize==0) {
+		$startSize: 0.000001;
+	}
+	@if ($minSize==0) {
+		$minSize: 0.000001;
+	}
+
+	// Для calc();
+	$addSize: math.div($startSize - $minSize, 16);
+
+	@if ($widthFrom == $containerWidth and $maxWidthContainer == 0) {
+		$widthFrom: $maxWidth;
+	}
+
+	// Брейк-поинты в EM
+	$widthFromMedia: em($widthFrom);
+	$widthToMedia: em($widthTo);
+
+	// Формула плавающего значения
+	// Источник: https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
+	$slope: math.div(($startSize - $minSize), ($widthFrom - $widthTo));
+	$yIntersection: -$widthTo * $slope + $minSize;
+	@if ($yIntersection==0) {
+		$yIntersection: 0.000001;
+	}
+	$flyValue: #{rem($yIntersection)}' + ' #{$slope * 100}vw;
+
+	// Получение значения свойства
+	$propertyValue: #{'clamp(' rem($minSize) ',' $flyValue ',' rem($startSize) ')'};
+	// Если отрицательные значения
+	@if ($minSize > $startSize) {
+		$propertyValue: #{'clamp(' rem($startSize) ',' $flyValue ',' rem($minSize) ')'};
+	}
+
+	// Если поддерживается clamp();
+	@supports (#{$property}: $propertyValue) {
+		#{$property}: $propertyValue;
+	}
+	// Если не поддерживается clamp();
+	@supports not (#{$property}: $propertyValue) {
+		#{$property}: calc(#{rem($minSize)} + #{$addSize} * (100vw - #{rem($widthTo)}) / #{math.div($widthFrom, 16) - math.div($widthTo, 16)});
+	}
+
+	// Устанавливаем значения по умолчанию
+	@if $widthFrom != $containerWidth and $widthFrom != $maxWidth and $keepSize != 1 and $keepSize != 2 {
+		@media (min-width: $widthFromMedia) {
+			#{$property}: inherit;
+		}
+	}
+	@if $widthTo != $minWidth and $keepSize != 1 and $keepSize != 3 {
+		@media (max-width: $widthToMedia) {
+			#{$property}: inherit;
+		}
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//:root {
+//
+//	--min-fs:     1;
+//	--max-fs:     1.5;
+//	--min-vw:     20;
+//	--max-vw:     45;
+//
+//	--min-fs-rem: var(--min-fs) * 1rem;
+//	--max-fs-rem: var(--max-fs) * 1rem;
+//	--min-vw-rem: var(--min-vw) * 1rem;
+//
+//	--slope:      (var(--max-fs) - var(--min-fs)) * (100vw - var(--min-vw-rem)) / (var(--max-vw) - var(--min-vw));
+//
+//	font-size:    clamp(var(--min-fs-rem), var(--min-fs-rem) + var(--slope), var(--max-fs-rem));
+//}
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+//slope = (maxFontSize - minFontSize) / (maxWidth - minWidth)
+//yAxisIntersection = -minWidth * slope + minFontSize
+//preferredValue = yAxisIntersection[rem] + (slope * 100)[vw]
+
+//font-size: clamp(1rem, -0.875rem + 8.333vw, 3.5rem)
+
+
+@mixin adaptive($properties, $min-vw, $max-vw, $min-value, $max-value) {
+	@each $property in $properties {
+		#{$property}: $min-value;
+	}
+
+	@media (min-width: $min-vw) {
+		@each $property in $properties {
+			#{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+		}
+	}
+
+	@media (min-width: $max-vw) {
+		@each $property in $properties {
+			#{$property}: $max-value;
+		}
+	}
+}
+
+@function strip-unit($number) {
+	@if type-of($number) == 'number' and not unitless($number) {
+		@return math.div($number, $number * 0 + 1);
+	}
+
+	@return $number;
+}
+
+
+///* Single property */
+//html {
+//	@include fluid-type(font-size, 320px, 1366px, 14px, 18px);
+//}
+//
+///* Multiple properties with same values */
+//h1 {
+//	@include fluid-type(padding-bottom padding-top, 20em, 70em, 2em, 4em);
+//}
+
+/////////////////////////////////////
+//@function betterClamp($minSize, $maxSize, $minWidth: 480, $maxWidth: 1536) {
+//	// convert to rem
+//	$minSize: math.div($minSize, 16);
+//	$maxSize: math.div($maxSize, 16);
+//	$maxWidth: math.div($maxWidth, 16);
+//	$minWidth: math.div($minWidth, 16);
+//	// do calculations
+//	$slope: math.div($maxSize - $minSize, $maxWidth - $minWidth);
+//	$yAxisIntersection: -$minWidth * $slope + $minSize;
+//	$preferredValue: #{$yAxisIntersection * 1rem} + #{$slope * 100vw};
+//	// output as rem
+//	$minSize: $minSize * 1rem;
+//	$maxSize: $maxSize * 1rem;
+//	@return clamp($minSize, $preferredValue, $maxSize);
+//}
+
+//////////////////////////////////
+//$min_width:    320;
+//$max_width:    1650;
+//$min_font:     12;
+//$max_font:     24;
+//:root {
+//	font-size: #{$min_font}px;
+//}
+//
+//@media (min-width: #{$min_width}px) and (max-width: #{$max_width}px) {
+//	:root {
+//		font-size: calc(#{$min_font}px + (#{$max_font} - #{$min_font}) * ((100vw - #{$min_width}px) / (#{$max_width} - #{$min_width})));
+//	}
+//}
+//
+//@media (min-width: #{$max_width}px) {
+//	:root {
+//		font-size: #{$max_font}px;
+//	}
+//}
+
+///////////////////////////////////////////////
+//font-size: calc(14px + (36 - 14) * ((100vw - 320px) / (2560 - 320));
+//font-size: calc(16px + (28 - 16) * ((100vw - 360px) / 1560));
+//font-size: clamp(16px, calc(16px + (28 - 16) * ((100vw - 360px) / 1560)), 28px);

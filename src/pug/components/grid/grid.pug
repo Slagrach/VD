@@ -1,0 +1,23 @@
+//while count < 10
+// - count ++;
+// - for (var j = 1; j < 10; j++)
+	span.grid__name= names[j]
+// - for(var i = 1; i < 10; i++) {
+// - }
+
+- var count = 0;
+- var names = ['Прием пациента', 'Неврология', 'Груминг', 'Стоматология', 'Хирургия', 'Нефрология', 'Кардиология', 'Вакцинация', 'Экзотические животные', 'Дерматология'];
+
+section.grid
+	.grid__container
+		.grid__content
+			ul.grid__list
+				each val, index in names
+					li.grid__item(class=`item-${index+1}`)
+						a.grid__link(href='')
+							.grid__header
+								span.grid__name= val
+								.grid__arrow
+									img(src='images/arrow-small.png' alt='' loading='lazy')
+							.grid__body
+								img(src='images/animals2/' + `${index+1}` + '.png' alt = '' loading='lazy')

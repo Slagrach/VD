@@ -1,0 +1,108 @@
+@use 'sass:math';
+@import 'reset';
+@import 'utils';
+@import 'mixins';
+@import 'fonts';
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding: var(--scroll-padding, 201px);
+}
+
+body {
+	position: relative;
+	font-family: 'ProximaNovaA', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #000000;
+
+	&._lock {
+		overflow: hidden;
+	}
+}
+
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+._page {
+	flex: 1 1 auto;
+}
+
+[class*='__container'] {
+	--max-width: 1200px;
+	--padding: 20px;
+	width: min(100% - var(--padding), var(--max-width));
+	margin-inline: auto;
+}
+
+[class*='__container'][data-type=''] {
+	--max-width: 0px;
+}
+
+._grid {
+	$columnCount: 1;
+	display: grid;
+	grid-template-columns: repeat($columnCount), 1fr;
+}
+
+._grid[data-columns='2'] {
+	$columnCount: 2;
+}
+
+._grid[data-columns='3'] {
+	$columnCount: 3;
+}
+
+._grid[data-columns='4'] {
+	$columnCount: 4;
+}
+
+._grid[data-columns='5'] {
+	$columnCount: 5;
+}
+
+._title {
+	font-size: 48px;
+	line-height: 53px;
+	font-weight: 600;
+	@media (max-width: 767px) {
+		font-size: 25px;
+		line-height: 30px;
+	}
+}
+
+._title-second {
+	font-size: 36px;
+	line-height: 40px;
+	font-weight: 600;
+	color: #28394D;
+	@media (max-width: 767px) {
+		font-size: 20px;
+		line-height: 30px;
+	}
+}
+
+
+@import '../pug/static/header/header';
+@import '../pug/static/footer/footer';
+@import '../pug/static/header/burger/burger';
+@import '../pug/includes/up/up';
+
+@import '../pug/components/intro/intro';
+@import '../pug/components/treat/treat';
+@import '../pug/components/services/services';
+@import '../pug/components/grid/grid';
+@import '../pug/components/prices/prices';
+@import '../pug/components/why/why';
+@import '../pug/components/help/help';
+@import '../pug/components/clinic/clinic';
+@import '../pug/components/doctors/doctors';
+@import '../pug/components/licenses/licenses';
+@import '../pug/components/reviews/reviews';
+@import '../pug/components/block/block';
+@import '../pug/components/faq/faq';
+@import '../pug/components/contacts/contacts';

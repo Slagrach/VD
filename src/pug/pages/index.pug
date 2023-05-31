@@ -1,0 +1,101 @@
+extends ../layout/main
+
+block vars
+	- title = 'ВЕТДОМ'
+	- pageClass = '_page'
+
+block head
+	include ../static/head/head
+
+block header
+	include ../static/header/header
+
+block main
+	include ../components/intro/intro
+	include ../components/treat/treat
+	include ../components/services/services
+	include ../components/grid/grid
+	include ../components/prices/prices
+	include ../components/why/why
+	include ../components/help/help
+	include ../components/clinic/clinic
+	include ../components/doctors/doctors
+	include ../components/licenses/licenses
+	include ../components/reviews/reviews
+	include ../components/block/block
+	include ../components/faq/faq
+	include ../components/contacts/contacts
+
+block footer
+	include ../static/footer/footer
+
+block up
+	include ../includes/up/up
+
+block popup
+
+block script
+	script(src='js/libs/libs.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.5/jquery.inputmask.min.js')
+	script(src='https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js')
+	script(src='https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js')
+	script.
+		new Swiper('.slider', {
+			slidesPerView: 2,
+			spaceBetween: 40,
+			// centeredSlides: true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+					renderBullet: function (index, className) {
+						return ('<span class="' + className + '">' + menu[index].innerHTML + '</span>');
+					}
+				}
+			},
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			breakpoints: {
+				320: {
+					slidesPerView: 1,
+					spaceBetween: 40,
+					resistanceRatio: 0.85
+				},
+				992: {
+					slidesPerView: 1,
+					spaceBetween: 40,
+					resistanceRatio: 0.85
+				},
+				1045: {
+					slidesPerView: 2,
+					spaceBetween: 40,
+					resistanceRatio: 0
+				}
+			},
+		});
+		Fancybox.bind("[data-fancybox]", {});
+		new Swiper('.clinic__slider', {
+			slidesPerView: 1,
+			spaceBetween: 10,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			}
+		});
+		new Swiper('.intro__slider', {
+			slidesPerView: 1,
+			spaceBetween: 10,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			}
+		});

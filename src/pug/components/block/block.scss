@@ -1,0 +1,178 @@
+.block {
+	background: url('../images/animals-group.png') no-repeat right center;
+
+	@media (max-width: 1366px) {
+		background-size: 48%;
+		background-position-y: 100%;
+	}
+
+	@media (max-width: 1024px) {
+		background-size: 48%;
+	}
+
+	@media (max-width: 992px) {
+		background: none;
+	}
+
+	&__content {
+		padding: 165px 0 197px;
+	}
+
+}
+
+.tabs {
+	display: flex;
+	align-items: center;
+	gap: 32px;
+	@media (max-width: 768px) {
+		gap: 10px;
+	}
+
+	@media (max-width: 767px) {
+		flex-direction: column;
+	}
+
+	&__nav {
+		border-radius: 20px;
+		box-shadow: 0 1px 19px rgba(0, 0, 0, 0.12);
+		background: #FFFFFF;
+		padding: 19px 26px;
+		@media (max-width: 768px) {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			flex: 1;
+			border-radius: 12px;
+			padding: 19px 15px;
+		}
+
+		@media (max-width: 767px) {
+			flex: unset;
+			width: 100%;
+			align-items: flex-start;
+		}
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__btn {
+		font-size: 18px;
+		line-height: 20px;
+		font-weight: 600;
+		text-transform: uppercase;
+		text-align: left;
+		border: 2px solid transparent;
+		border-radius: 57px;
+		color: #28394D;
+		background: transparent;
+		padding: 14px 25px;
+		transition: background .4s ease 0s;
+
+		@media (any-hover: hover) {
+			&:hover {
+				border-color: #3183E3;
+				background: #31c8e3;
+			}
+		}
+
+		@media (max-width: 768px) {
+			font-size: 16px;
+			border-radius: 12px;
+		}
+
+		&._active {
+			border-color: #3183E3;
+			color: #FFFFFF;
+			background: #3183E3;
+		}
+	}
+
+	&__body {
+		height: 561px;
+		border-left: 2px solid #D2D2D2;
+
+		@media (max-width: 768px) {
+			flex: 1;
+		}
+
+		@media (max-width: 767px) {
+			flex: unset;
+			width: 100%;
+		}
+	}
+
+	&__block {
+		display: none;
+		height: 100%;
+		padding: 0 0 0 8px;
+
+		@media (max-width: 767px) {
+			width: 100%;
+		}
+
+		&._active {
+			display: block;
+		}
+	}
+
+	&__overflow {
+		height: 100%;
+		overflow: auto;
+		direction: rtl;
+
+		@media (max-width: 768px) {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+		}
+
+		&::-webkit-scrollbar {
+			width: 5px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: #FFFFFF;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: #3183E3;
+			border-radius: 7px;
+		}
+	}
+
+	&__block-list {
+		max-width: 300px;
+		background: #FFFFFF;
+		padding: 0 0 0 40px;
+
+		@media (max-width: 768px) {
+			padding: 0 0 0 30px;
+		}
+
+		li {
+			position: relative;
+			text-align: left;
+
+			&:after {
+				position: absolute;
+				content: '';
+				top: 10px;
+				left: -15px;
+				width: 3px;
+				height: 3px;
+				border-radius: 50%;
+				background: #45494C;
+			}
+
+			span {
+				font-size: 18px;
+				line-height: 27px;
+				color: #45494D;
+			}
+		}
+	}
+}

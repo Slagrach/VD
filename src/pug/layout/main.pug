@@ -1,0 +1,20 @@
+block vars
+	- title = ''
+	- pageClass = ''
+	- wrapperClass = ''
+
+doctype html
+html(lang='ru')
+	head
+		block head
+		title #{title}
+	body
+		.wrapper(class=wrapperClass)
+			block header
+			main(class=pageClass)
+				block main
+			block footer
+		block up
+		block popup
+		block script
+		script(src='js/index.js')

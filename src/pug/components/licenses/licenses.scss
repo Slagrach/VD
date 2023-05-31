@@ -1,0 +1,143 @@
+.licenses {
+
+	&__container {
+	}
+
+	&__content {
+		padding: 150px 0 32px;
+	}
+
+	&__header {
+		margin: 0 0 25px;
+		@media(max-width: 992px) {
+		}
+	}
+
+	&__title {
+		color: #28394D;
+	}
+
+	&__body {
+		position: relative;
+		display: flex;
+	}
+
+	&__left {
+		max-width: 408px;
+		width: 100%;
+
+		img {
+			display: block;
+			max-width: 100%;
+			width: 100%;
+			@media(max-width: 992px) {
+				max-width: unset;
+				width: 170px;
+			}
+		}
+
+		@media(max-width: 992px) {
+			position: absolute;
+			max-width: 100%;
+		}
+	}
+
+	&__right {
+		position: relative;
+		max-width: 792px;
+		width: 100%;
+		padding: 70px 0 0 0;
+
+		&:before {
+			position: absolute;
+			content: '';
+			right: -201px;
+			bottom: -89px;
+			width: 461px;
+			height: 458px;
+			background: url('../images/licenses/6.png') no-repeat center;
+			z-index: 0;
+
+			@media(max-width: 1500px) {
+				@include adaptive(right, 1366px, 1500px, -120px, -201px)
+			}
+
+			@media(max-width: 1366px) {
+				@include adaptive(right, 1240px, 1366px, -70px, -120px)
+			}
+
+			@media(max-width: 1024px) {
+				right: -20px;
+				bottom: 50px;
+				background-size: 130%;
+			}
+			@media(max-width: 992px) {
+				bottom: 60px;
+				background-size: 100%;
+			}
+			@media(max-width: 767px) {
+				top: -120px;
+				right: -130px;
+				bottom: auto;
+				background-size: 60%;
+			}
+		}
+
+		@media (any-hover: hover) {
+			&:hover:before {
+				filter: sepia(1) hue-rotate(140deg) saturate(10);
+				transition: filter .4s ease 0s;
+			}
+		}
+
+		@media(max-width: 992px) {
+			max-width: 100%;
+			padding: 136px 0 0 0;
+		}
+	}
+
+	&__list {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		z-index: 1;
+		@media(max-width: 1230px) {
+			gap: 10px;
+		}
+		@media(max-width: 768px) {
+			justify-content: center;
+		}
+		@media(max-width: 767px) {
+			$columnCount: 2;
+			display: grid;
+			grid-template-columns: repeat($columnCount, 1fr);
+		}
+	}
+
+	&__item {
+		@media(max-width: 767px) {
+			flex: 1;
+		}
+	}
+
+	&__link {
+		width: 100%;
+		border: 2px solid transparent;
+		border-radius: 8px;
+		overflow: hidden;
+		transition: all .4s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				border-color: #86c4c6;
+				scale: 1.1;
+			}
+		}
+
+		img {
+			@media(max-width: 767px) {
+				width: 100%;
+			}
+		}
+	}
+}

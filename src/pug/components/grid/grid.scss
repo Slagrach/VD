@@ -1,0 +1,126 @@
+.grid {
+
+	&__content {
+		padding: 150px 0 0 0;
+	}
+
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(224px, 1fr));
+		justify-content: space-between;
+		gap: 20px;
+		@media (max-width: 420px) {
+			grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+		}
+		@media (max-width: 420px) {
+			gap: 10px;
+		}
+		@media (max-width: 380px) {
+			grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+		}
+	}
+
+	&__item {
+		border: 2px solid transparent;
+		border-radius: 20px;
+		transition: translate .4s ease 0s, border-color .4s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				border-color: #86c4c6;
+				translate: 0 -5px;
+
+				.grid__name {
+					color: #0070F0;
+				}
+
+				.grid__arrow {
+					border-color: #86c4c6;
+					overflow: hidden;
+					img {
+						animation: aniArrow02 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+					}
+				}
+			}
+		}
+		@media (max-width: 420px) {
+			border-radius: 12px;
+		}
+	}
+
+	&__link {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		padding: 21px 22px 0 20px;
+		@media (max-width: 420px) {
+			padding: 15px 10px 0 10px;
+		}
+	}
+
+	&__header {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+	}
+
+	&__name {
+		font-size: 18px;
+		line-height: 20px;
+		font-weight: 600;
+		color: #FFFFFF;
+		transition: color .4s ease 0s;
+		@media (max-width: 767px) {
+			font-size: 15px;
+			line-height: 15px;
+		}
+	}
+
+	&__arrow {
+		min-width: 31px;
+		height: 31px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid transparent;
+		border-radius: 50px;
+		background: #FFFFFF;
+		transition: border-color .4s ease 0s;
+	}
+
+	&__body {
+		height: 100%;
+
+		img {
+			height: inherit;
+			@media (max-width: 420px) {
+				display: block;
+				max-width: 100%;
+			}
+		}
+	}
+}
+
+$bg-color: #B3ACFA, #F2B5E1, #CA97E2, #C8CFFB, #F8B5D6, #EABBF1, #C4EAB9, #CAC5FB, #D3D9FB, #FEC6C7;
+
+//@for $i from 1 through 10 {
+//	.item-#{$i} {
+//		background: nth($bg-color, $i);
+//	}
+//}
+
+//@for $i from 1 through length($refcolors) {
+//	$c: nth($refcolors, $i);
+//
+//	// ... do something fancy with $c
+//}
+
+@each $color in $bg-color {
+	$i: index($bg-color, $color);
+	.item-#{$i} {
+		background: #{$color};
+	}
+}

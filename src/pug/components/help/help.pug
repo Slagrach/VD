@@ -1,0 +1,20 @@
+section.help
+	.help__container
+		.help__content
+			.help__left
+				img(src='images/help/1.png' alt='' loading='lazy')
+			.help__right
+				h2.help__title._title-second Скорая ветеринарная помощь 24/7
+				span.help__subtitle Для вызова врача сообщите контактные данные.
+				form.help__form
+					.help__form-inner
+						.help__form-tem
+							label.help__form-label(for='name-help')
+							input.help__form-input#name-help(type='text', name='name-help', placeholder='Введите ваше имя', pattern='[a-z]{1,15}', autocomplete='off', data-rule-required="true", data-rule-minlength="2", data-msg="Введите ваше имя")
+						.help__form-tem
+							label.help__form-label(for='phone')
+							input.help__form-input.phone-field#phone(type='text', name='phone', placeholder='Номер телефона', autocomplete='off', data-rule-required="true", data-rule-minlength="10", data-msg="Введите номер телефона")
+						button.help__form-btn(type='submit') Вызов врача
+					.help__form-tem
+						input.help__form-input.help__form-input--check#agree(type='checkbox', name='agree', checked)
+						label.help__form-label.help__form-label--check(for='agree') Я прочитал и согласен с условиями обработки персональных данных.

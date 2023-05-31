@@ -1,0 +1,57 @@
+* {
+	outline: transparent;
+	padding: 0;
+	margin: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+//img,
+//picture,
+//svg,
+//video {
+//	display: block;
+//	max-width: 100%;
+//	width: 100%;
+//}
+
+picture {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+button, input, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	border: none;
+	background: inherit;
+}
+
+button {
+	cursor: pointer;
+}
+
+a,
+span {
+	display: inline-block;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ul, ol {
+	list-style: none;
+}

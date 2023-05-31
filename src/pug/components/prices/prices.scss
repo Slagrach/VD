@@ -1,0 +1,147 @@
+.prices {
+
+	&__content {
+		padding: 150px 0 200px;
+	}
+
+	&__header {
+		margin: 0 0 50px;
+	}
+
+	&__title {
+		color: #28394D;
+	}
+
+	&__body {
+		position: relative;
+		display: flex;
+	}
+
+	&__left {
+		position: relative;
+		width: 787px;
+		z-index: 1;
+
+		&:before {
+			position: absolute;
+			content: '';
+			top: -85px;
+			left: 630px;
+			width: 764px;
+			height: 713px;
+			background: url('../images/price/1.png') no-repeat;
+			z-index: -1;
+			@media (max-width: 1024px) {
+				left: 550px;
+			}
+
+			@media (max-width: 992px) {
+				content: none;
+			}
+		}
+	}
+
+	&__spoiler {
+		width: 100%;
+		border-radius: 4px;
+		overflow: hidden;
+
+		.prices__item:nth-child(2n+1) {
+			.prices__title-btn {
+				background: #D5DBFE;
+			}
+		}
+
+		.prices__item:nth-child(2n) {
+			.prices__title-btn {
+				background: #E5E9FD;
+			}
+		}
+	}
+
+	&__item {
+		width: 100%;
+	}
+
+	&__title-btn {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 18px;
+		line-height: 20px;
+		padding: 6px 22px 6px 16px;
+		@media (max-width: 767px) {
+			padding: 6px 12px;
+		}
+
+		@media (max-width: 767px) {
+			font-size: 15px;
+		}
+
+		img:not(._icon-plus) {
+			display: none;
+		}
+
+		&._active {
+			._icon-plus {
+				display: none;
+			}
+
+			img:not(._icon-plus) {
+				display: block;
+			}
+		}
+	}
+
+	&__subtitle {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: #E9EBF9;
+		padding: 6px 16px 6px 22px;
+		@media (max-width: 767px) {
+			padding: 6px 12px;
+		}
+
+		strong {
+			font-size: 12px;
+			line-height: 13px;
+		}
+	}
+
+	&__list {
+		background: rgba(247, 247, 252, 0.73);
+
+		li {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 5px;
+			border-bottom: 1px solid #E1E3EE;
+			padding: 12px 16px 12px 22px;
+
+			@media (max-width: 767px) {
+				padding: 12px;
+			}
+
+			&:first-child {
+				border-top: 1px solid #E1E3EE;
+			}
+
+			span {
+				font-size: 14px;
+				line-height: 15px;
+				color: #333333;
+				@media (max-width: 767px) {
+					font-size: 13px;
+				}
+			}
+		}
+	}
+
+	&__cost {
+		white-space: nowrap;
+	}
+}
+
